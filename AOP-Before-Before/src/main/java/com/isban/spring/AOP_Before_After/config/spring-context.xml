@@ -1,0 +1,30 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd ">
+
+<aop:aspectj-autoproxy />
+<!-- Declaramos el Bean con los metodos Implementados -->
+<bean id="operacion" class="com.isban.spring.AOP_Before_After.bean.OperacionImp">   </bean>  
+<!-- Declaramos el Bean correspondiente a el Aspecto -->
+<bean id="rutaAspecto" class="com.isban.spring.AOP_Before_After.aspect.RutaOperaciones"></bean>  
+          
+<aop:config>  
+  <aop:aspect id="miaspecto" ref="rutaAspecto" >  
+     <!-- @Before -->
+     <aop:pointcut id="puntoCorteBefore"   expression="execution(* com.isban.spring.AOP_Before_After.bean.Operacion.*(..))" />  
+     <aop:before method="miAvisoBefore" pointcut-ref="puntoCorteBefore" />
+     
+     
+     <!-- @after -->
+     <aop:pointcut id="puntoCorteAfter"   expression="execution(* com.isban.spring.AOP_Before_After.bean.Operacion.*m*(..))" />
+     <aop:after method="miAvisoAfter" pointcut-ref="puntoCorteAfter"/>
+     
+
+  </aop:aspect>  
+</aop:config>  
+
+</beans>

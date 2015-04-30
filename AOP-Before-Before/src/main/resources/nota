@@ -1,0 +1,15 @@
+Ejemplo de Before y After
+
+
+Configurando en spring-context el atributo "expression" podemos especificar que lance
+la funcionalidad transversal (RutaOperaciones) 
+
+Tenemos las etiquetas Before y After apuntando a un mismo pointcut, 
+que lanza todos los metodos de la clase
+<aop:pointcut id="puntoCorteBefore"   expression="execution(* com.isban.spring.AOP_Before_After.bean.Operacion.*(..))" />
+
+si creamos dos pointcut, uno para todos los metodos y otro para aquellos 
+que contengan la "m" y vinculamos a este la etiqueta After,
+lanza todos los metodos de la clase cuyo nombre contenga la m con After
+y lanza el resto de metodos de la clase solo por Before
+<aop:pointcut id="puntoCorteAfter" expression="execution(* com.isban.spring.AOP_Before_After.bean.Operacion.*m(..))" />
